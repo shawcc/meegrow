@@ -1,0 +1,262 @@
+:root {
+  --app-bg: #0b0c10;
+  --panel: #12141a;
+  --panel-2: #171a22;
+  --text: #e7eaf0;
+  --muted: rgba(231, 234, 240, 0.7);
+  --border: rgba(231, 234, 240, 0.12);
+  --brand: #6d9cff;
+  --good: #39d98a;
+  --warn: #ffb020;
+  --bad: #ff5c5c;
+  --shadow: rgba(0, 0, 0, 0.35) 0 18px 40px -18px;
+
+  color-scheme: dark;
+  font: 14px/150% system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+  background: var(--app-bg);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  min-height: 100svh;
+}
+
+.sidebar {
+  border-right: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel), var(--app-bg));
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(109, 156, 255, 0.08);
+  border: 1px solid rgba(109, 156, 255, 0.18);
+  margin-bottom: 14px;
+}
+
+.brand .title {
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.brand .sub {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.nav a.active {
+  background: var(--panel-2);
+  border-color: var(--border);
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.main {
+  padding: 18px 18px 40px;
+  box-sizing: border-box;
+}
+
+.topbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.select {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.select label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.select select {
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 9px 10px;
+  outline: none;
+}
+
+.pageTitle {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: rgba(18, 20, 26, 0.72);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.cardHeader .h {
+  font-weight: 650;
+}
+
+.cardHeader .sub {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kpi {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.kpiMeta {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  padding: 9px 8px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  color: var(--muted);
+  font-weight: 600;
+  border-top: none;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pill.good {
+  border-color: rgba(57, 217, 138, 0.35);
+  color: var(--good);
+}
+
+.pill.warn {
+  border-color: rgba(255, 176, 32, 0.35);
+  color: var(--warn);
+}
+
+.pill.bad {
+  border-color: rgba(255, 92, 92, 0.35);
+  color: var(--bad);
+}
+
+.spark {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: end;
+  gap: 2px;
+  height: 40px;
+}
+
+.spark span {
+  width: 6px;
+  border-radius: 4px 4px 0 0;
+  background: rgba(109, 156, 255, 0.6);
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 980px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}
