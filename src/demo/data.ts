@@ -3,6 +3,9 @@ import type {
   AlertItem,
   ChannelMetric,
   EventDefinition,
+  FeatureFunnel,
+  FeatureHealthMetric,
+  LatencyItem,
   MetricSeries,
   MonetizationMetrics,
   Motion,
@@ -331,6 +334,15 @@ export function getEventDictionary(): EventDefinition[] {
       optionalProps: ['project_id'],
     },
     {
+      name: 'invite_accept',
+      category: 'Collaboration',
+      description: '邀请被接受',
+      owner: 'Growth',
+      version: '1.0.0',
+      requiredProps: [...baseProps, 'invitee_domain'],
+      optionalProps: ['invite_latency_hours'],
+    },
+    {
       name: 'paywall_view',
       category: 'Monetization',
       description: '看到付费墙',
@@ -349,4 +361,81 @@ export function getEventDictionary(): EventDefinition[] {
       optionalProps: ['billing_period', 'seats_purchased'],
     },
   ]
+}
+
+export function getFeatureHealthMetrics(ctx: DemoContext) {
+  const factor = ctx.motion === 'Lark' ? 0.92 : ctx.motion === '独立' ? 1.06 : 1
+  const metrics: FeatureHealthMetric[] = [
+    {
+      name: '邀请接受率',
+      value: 0.298 * factor,
+      unit: '%',
+      target: 0.32,
+      trend: ctx.motion === 'Lark' ? 'down' : 'up',
+    },
+    {
+      name: '多人协作达成率',
+      value: 0.41 * factor,
+      unit: '%',
+      target: 0.45,
+      trend: ctx.motion === '独立' ? 'up' : 'flat',
+    },
+    {
+      name: '任务状态流转/人/周',
+      value: Math.round(14 * factor),
+      unit: '次',
+      target: 16,
+      trend: 'up',
+    },
+    {
+      name: '评论参与率',
+      value: 0.36 * factor,
+      unit: '%',
+      target: 0.4,
+      trend: 'down',
+    },
+  ]
+
+  const funnels: FeatureFunnel[] = [
+    {
+      name: '邀请链路',
+      steps: [
+        { label: 'Invite Send', value: Math.round(4200 * factor) },
+        { label: 'Invite Accept', value: Math.round(1250 * factor) },
+        { label: '新成员 7D 活跃', value: Math.round(760 * factor) },
+      ],
+    },
+    {
+      name: '协作链路',
+      steps: [
+        { label: '创建任务', value: Math.round(9800 * factor) },
+        { label: '状态流转', value: Math.round(7200 * factor) },
+        { label: '评论/指派', value: Math.round(4300 * factor) },
+        { label: '多人协作', value: Math.round(2800 * factor) },
+      ],
+    },
+  ]
+
+  const latency: LatencyItem[] = [
+    {
+      name: 'Issue 状态流转 API',
+      p50: Math.round(180 * factor),
+      p95: Math.round(620 * factor),
+      errorRate: 0.006 * factor,
+    },
+    {
+      name: '任务列表加载',
+      p50: Math.round(240 * factor),
+      p95: Math.round(880 * factor),
+      errorRate: 0.004 * factor,
+    },
+    {
+      name: '评论提交',
+      p50: Math.round(210 * factor),
+      p95: Math.round(700 * factor),
+      errorRate: 0.008 * factor,
+    },
+  ]
+
+  return { metrics, funnels, latency }
 }

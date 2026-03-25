@@ -81,6 +81,26 @@ export type MonetizationMetrics = {
   upgradeFunnel: FunnelStep[]
 }
 
+export type FeatureHealthMetric = {
+  name: string
+  value: number
+  unit: string
+  target?: number
+  trend: 'up' | 'down' | 'flat'
+}
+
+export type FeatureFunnel = {
+  name: string
+  steps: FunnelStep[]
+}
+
+export type LatencyItem = {
+  name: string
+  p50: number
+  p95: number
+  errorRate: number
+}
+
 export type AlertItem = {
   id: string
   title: string

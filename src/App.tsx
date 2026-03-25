@@ -8,6 +8,7 @@ import { AcquisitionPage } from './pages/AcquisitionPage'
 import { ActivationPage } from './pages/ActivationPage'
 import { RetentionPage } from './pages/RetentionPage'
 import { MonetizationPage } from './pages/MonetizationPage'
+import { FeatureHealthPage } from './pages/FeatureHealthPage'
 import { EventDictionaryPage } from './pages/EventDictionaryPage'
 import { AlertsPage } from './pages/AlertsPage'
 import { AdminPage } from './pages/AdminPage'
@@ -34,6 +35,7 @@ function AppInner() {
     { key: 'activation', label: '激活', perm: 'view_dashboards' as const },
     { key: 'retention', label: '留存', perm: 'view_dashboards' as const },
     { key: 'monetization', label: '营收/扩席', perm: 'view_dashboards' as const },
+    { key: 'features', label: '功能健康度', perm: 'view_dashboards' as const },
     { key: 'events', label: '事件字典', perm: 'view_event_dictionary' as const },
     { key: 'alerts', label: '告警中心', perm: 'view_alerts' as const },
     { key: 'admin', label: '管理', perm: 'view_audit' as const },
@@ -122,6 +124,7 @@ function AppInner() {
         {allowed && route === 'activation' ? <ActivationPage /> : null}
         {allowed && route === 'retention' ? <RetentionPage /> : null}
         {allowed && route === 'monetization' ? <MonetizationPage /> : null}
+        {allowed && route === 'features' ? <FeatureHealthPage /> : null}
         {allowed && route === 'events' ? <EventDictionaryPage /> : null}
         {allowed && route === 'alerts' ? <AlertsPage /> : null}
         {allowed && route === 'admin' ? <AdminPage /> : null}

@@ -6,6 +6,7 @@ export type RouteKey =
   | 'activation'
   | 'retention'
   | 'monetization'
+  | 'features'
   | 'events'
   | 'alerts'
   | 'admin'
@@ -19,6 +20,7 @@ function parseHash(): RouteKey {
     'activation',
     'retention',
     'monetization',
+    'features',
     'events',
     'alerts',
     'admin',
@@ -48,6 +50,7 @@ export function routeTitle(r: RouteKey) {
     activation: '激活',
     retention: '留存',
     monetization: '营收/扩席',
+    features: '功能健康度',
     events: '事件字典',
     alerts: '告警中心',
     admin: '管理',
